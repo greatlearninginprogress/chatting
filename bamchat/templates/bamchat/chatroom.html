@@ -1,0 +1,64 @@
+{% extends 'main1.html' %}
+
+{% load static %}
+{% block title %}
+
+
+
+
+{% endblock %}
+
+{% block script %}
+<!-- <script src = '{% static "javascript/main1.js" %}' defer></script> -->
+{% endblock script%}
+
+{% block content %}
+
+<div style = 'display:block; background-color:white;width:100%;height:370px;'>
+	<div class = 'chatting-with'>
+		<a style = 'float:left; text-align: left;' href = '{% url "chats" %}'><img  style = 'background-color: white;border-width:5px; border-style: solid;border-color: white; ' class = 'icon' src ='{% static "bamchat_image/previous.png" %}' ></a><br>
+		<p style = 'margin-left:15%;margin-top:45px;'>{{username}} </p>
+		<!-- <p>{{username}}</p> -->
+	</div>
+
+	
+	<div class = 'message-container'>
+		
+		{% for message in messages %}
+		{% if message.sender == request.user %}
+		<div class = 'sender-message'>
+		<p style = 'padding-top: 10px; font-size:15px' class = 'message'>
+			{{message.text}}
+		</p>
+		<small style = 'font-size: 13px;font-weight: 500;float:left;width:50%;text-align:left'>
+			<a style="color:blue" href="{% url 'edit-chatmessage' message.id %}">edit</a>|
+			<a style="color:red" href="{% url 'delete-chatmessage' message.id %}">delete</a>
+		</small>
+		<small style = 'font-size: 13px;font-weight: 500;float:right'>
+			{{message.date}}
+		</small><br>
+		</div>
+		<!-- <br> -->
+		{% else %}
+
+		<div class = 'receiver-message'>
+		<p class = 'message'>{{message.text}}</p>
+		<small style = 'font-size: 13px;font-weight: 500;float:right'>{{message.date}}</small><br>
+		</div>
+		<!-- <br> -->
+		{% endif %}
+		{% endfor %}
+
+		<p id = 'focus'>
+	</div>
+	<div class = 'submit-container'>
+			<form method = 'post' action  = ''>
+				{% csrf_token %}
+				<textarea class = 'submit-form' name = 'text' required></textarea>
+				<input class = 'submit' type = 'submit' value = 'send'>
+			</form>
+	</div>
+</div>
+
+{% endblock %}
+

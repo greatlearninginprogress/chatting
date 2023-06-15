@@ -1,0 +1,94 @@
+{% extends 'main1.html' %}
+
+{% load static %}
+{% block title %}
+
+
+Bamchat Chat Page
+
+{% endblock %}
+
+{% block script %}
+<script src = '{% static "javascript/main1.js" %}' defer></script>
+{% endblock script%}
+
+{% block content %}
+
+<div  style = 'border-style: none' id = 'main'>
+	 <!-- |  -->
+	<!-- <img class = 'image'  src = '{% static "bamchat_image/logo.png" %}'> -->
+	<div class = 'header-bg'>
+		<div class = 'head'>
+			<p style = 'display:inline'>
+<!-- 			<img id = 'show-profile' class = 'icon' style = 'background:white;float:right;margin-top:5px;margin-right: 5px' src = '{% static "bamchat_image/menu.png" %}'>
+ -->	
+			<form method = 'post' action = ''>
+				{% csrf_token %}
+				<input class = 'fsearch' name = 'friend' type = 'search' placeholder="search friend list....." required>
+				
+			</form></p>
+		</div>
+
+		<div class = 'head2'>
+			<a href = '{% url "home-page"%}'><img style = 'background:white;border-radius:25px' class = 'icon' src = '{% static "bamchat_image/home-button.png" %}'></a>
+			<a href = '{% url "friend-page"%}' class = 'active'><img style = 'border-radius: 50%' class = 'icon' src = '{% static "bamchat_image/friend.png" %}'></a>
+			<a href = '{% url "chats"%}' ><img style = 'background:white;border-radius:25px;border-width:3px;border-style:solid;border-color: white'  class = 'icon' src = '{% static "bamchat_image/chat.png" %}'></a>
+			<a href = '{% url "group-page" %}'><img  class = 'icon' src = '{% static "bamchat_image/group.png" %}'></a>
+			
+
+		</div>
+	</div>
+	<div class = 'content-bg'>
+
+		<div class ='chat-container' >
+			{% for friend, message in friend_messages %}
+			
+			{% if friend.request_sender == request.user %}
+			
+			<div class = 'chat-friend' >
+				<img style = 'float:left; border-radius: 50%' class = 'icon' src = '{{friend.request_receiver.usercontact.picture.url}}'>
+				<a style = 'color:blue;font-size:14px;' href = '{% url "chat-room" friend.request_receiver.id %}'>{{friend.request_receiver}}<br>
+					<small style='margin-left:50px;color:black;font-size:12px'>{{message}}</small>
+				</a>
+				
+			</div>
+			
+		
+			{% else %}
+			
+				<div class = 'chat-friend'>
+					<img style = 'float:left; border-radius: 50%' class = 'icon' src = '{{friend.request_sender.usercontact.picture.url}}'>
+					<a style = 'color:blue;font-size:14px;' href = '{% url "chat-room" friend.request_sender.id %}'>
+					{{friend.request_sender}}
+					</a><br>
+					<small style='margin-left:50px;color:black;font-size:12px'>{{message}}</small>
+					
+				</div>
+			
+			{% endif %}
+			<!-- <p>{{friend}}</p> -->
+			
+			{% endfor %}
+			<!-- {% for friend2 in friends2 %}
+			<p>{{friend2}}</p>
+			
+			{% endfor %} -->
+		</div>
+
+		
+		
+
+
+		
+	</div>
+
+
+	
+		
+	
+	
+</div>
+
+	
+{% endblock %}
+

@@ -1,0 +1,33 @@
+{% extends 'main1.html' %}
+{% load static %}
+{% block content %}
+<div style="background-color: white;height:410px;padding-bottom:90px">
+	<div style = 'margin-top:5px;margin-bottom: 17px;background-color: blue;padding:5px 0px 5px 0px'>
+		<a onclick = 'history.back(-1)'><img  style = 'border-color: white; border-style: solid;width:4%' class = 'icon' src ='{% static "bamchat_image/previous.png" %}'></a>
+		<small style ='color:white;font-weight: 700; font-size:20px'>{{post_title}}</small>
+	</div>
+	<div style="background:white;padding-bottom: 90px">
+		
+			{% for comment in post.comment.all %}
+			<section style="margin-left: 80px;margin:10px 0px 17px 60px; ">
+				<section style="background:rgb(200,200,200) ;padding:7px 5px 7px 1px;color:black;width:40%;border-radius:15px">
+					<a style="color:black" href = '{% url "view-friend" comment.user.id %}' ><small><img style="width:3%; margin-right: 15px" src="{{comment.user.usercontact.picture.url}}">{{comment.user}}</small></a><br>
+					<section style="margin-left: 45px;">
+							<small style="text-align:justify;">{{comment}}</small>
+					</section>
+					<!-- <small style="margin-left: 45px;text-align:justify">{{comment}}</small>	 -->
+				</section>
+				
+			</section>
+		
+			{% endfor %}
+					
+
+	</div>
+
+	
+</div>
+
+
+
+{% endblock content %}

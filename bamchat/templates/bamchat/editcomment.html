@@ -1,0 +1,53 @@
+{% extends 'main1.html' %}
+{% load static %}
+{% block content %}
+
+{% if delete is True %}
+
+<div style='display:block;padding-top:30px'>
+<a onclick = "history.back(-1)"><img style = 'background-color: white;border-width:5px; border-style: solid;border-color: white;width:30px; 'class = 'icon' src ='{% static "bamchat_image/previous.png" %}' ></a>
+	
+</div>
+
+
+<div style ='display:block; margin-top: 5px;padding-bottom: 50px'>
+	<div style = 'margin-left:40px'>
+		<h3 style = 'color:white'>Are you sure you want to delete this comment?</h3>
+		<form method = 'post' action = ''>
+			{% csrf_token %}
+			<input type="hidden" name="confirm" value="Yes" >
+
+			<input  style="background-color: white; color:red; padding:5px; border-radius:10px; font-size: 14px;border-style: none; " type="submit" value = 'Yes'>
+			<input style="background-color: white; color:blue; padding:5px; border-radius:10px; font-size: 14px;border-style: none;" onclick = "history.back(-1)"type="button" value="No">
+	
+		</form>
+
+	</div>
+
+</div>
+
+
+
+{% else %}
+<div style='display:block;padding-top:30px'>
+<a onclick = "history.back(-1)" ><img style = 'background-color: white;border-width:5px; border-style: solid;border-color: white;width:30px; 'class = 'icon' src ='{% static "bamchat_image/previous.png" %}' ></a>
+	
+</div>
+
+
+<div style ='display:block; margin-top: 5px;padding-bottom: 50px'>
+	<div style = 'margin-left:40px'>
+		<!-- <h3 style = 'color:white'>Edit Post</h3> -->
+	<form method = 'post' action = ''>
+	{% csrf_token %}
+	<p style = 'color:white'>Edit comment</p>
+	<textarea  style = 'width:40%; height:150px'  name = 'comment' required>{{comment.text}}</textarea>
+	<input  style = 'background-color:white;color:blue; padding:5px; border-radius:25px' type = 'submit' value= 'Save'>
+
+	</form>
+	</div>
+
+</div>
+{% endif %}
+
+{% endblock content %}

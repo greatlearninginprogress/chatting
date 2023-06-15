@@ -1,0 +1,47 @@
+{%extends 'main2.html' %}
+
+
+
+{% block title %}
+
+BAMCHAT : LOGIN
+
+{% endblock %}
+
+
+
+{% block content %}
+<div class = 'signup-container'>
+	{% for message in messages %}
+	
+
+	{% if message.tags is error %}
+	<p  style = 'color:red' class ='sbutton'>{{message}}</p>
+	{% else  %}
+	
+	<p style = 'color:green'  class ='sbutton'>{{message}}</p>
+	{% endif %}
+	{% endfor %}
+	<div class = 'signup-form'>
+		<form method = 'post' action  = ''>
+			{% csrf_token %}
+			<p class = 'pbutton'>Username is either phone number or email</p>
+			<p><label for = 'username'>Enter username <br><input class = 'input' type = 'text' id = 'username' placeholder="Enter username" name = 'username' value = '{{username}}'required></label></p>
+
+			<p><label for = 'password'>Enter password<br><input class = 'input' type = 'password' id = 'password' placeholder="Enter password" name = 'password' value ='{{password}}' required></label></p>
+
+			<p>Forgotten your password?<a href = '{% url "forget-password" %}'> Click here</a></p>
+
+			<p>No account?<a href = '{% url "signup-page" %}'> Sign up</a></p>
+
+			<!-- <p><a class = 'link' href = '{% url "creation-page" %}'>Go back</a></p> -->
+			<input class = 'cbutton' type = 'submit' value = 'Login' >
+
+		</form>
+		
+	</div>
+</div>
+
+
+
+{% endblock %}

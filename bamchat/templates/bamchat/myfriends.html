@@ -1,0 +1,53 @@
+{% extends 'main1.html' %}
+
+{% load static %}
+
+
+
+{% block content %}
+
+<div style="background-color: white; display:block;width:95%;margin-right:auto;margin-left: auto;margin-top: 0px;padding:5px 5px 100px 5px;height:400px;">
+	<div style='display:block;padding-top:30px'>
+		<a onclick = "history.back(-1)"><img style = 'background-color: white;border-width:5px; border-style: solid;border-color: white;width:30px; 'class = 'icon' src ='{% static "bamchat_image/previous.png" %}' >
+		</a>
+	
+	</div>
+	
+	<section>
+		{% if length > 1 %}
+		<h3 style = 'margin-left: 45px'>My Friends</h3>
+		{% else %}
+		<h3 style = 'margin-left: 45px'>My Friend</h3>
+		{% endif %}
+	</section>
+
+{% if friends %}
+<section>
+	{% for friend in friends %}
+
+	  {% if friend.request_sender == request.user %}
+	 	<p><a style = 'color:blue' href="{% url 'chat-room' friend.request_receiver.id %}">{{friend.request_receiver}}</a> -- <a style = 'color:blue' href="tel:{{friend.request_receiver.usercontact.phone_number}}">{{friend.request_receiver.usercontact.phone_number}}</a>--
+	 		<a style  =  'color:red' href="">unfriend</a>
+	 	</p>
+	  {% else %}
+	  	<p><a style = 'color:blue' href = '{% url "chat-room" friend.request_sender.id %}'>{{friend.request_sender}}</a> -- <a style = 'color:blue' href="tel:{{friend.request_sender.usercontact.phone_number}}">{{friend.request_sender.usercontact.phone_number}}</a>--
+	 		<a style  =  'color:red' href="{% url 'delete' friend.id %}">unfriend</a> </p>
+	  {% endif %}
+ 
+  	{% endfor %}
+</section>
+
+  
+{% else %}
+	
+	<section>
+		<h3>You have no friend</h3>
+	</section>
+	
+	
+
+{% endif %}
+</div>
+
+
+{% endblock %}

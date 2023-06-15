@@ -1,0 +1,25 @@
+{% extends 'main2.html' %}
+
+{% block content %}
+<div class = 'signup-container'>
+	
+	<div class = 'signup-form'>
+		<div class = 'pbutton'>
+			<p>Account not yet activated</p>
+			<p>Enter the OTP sent to {{email}} to activate your account</p>
+		</div>
+		<form method = 'post' action="">
+			{% csrf_token %}
+			<p>Enter OTP <br><input placeholder="enter otp" type = 'text' name = 'otp' value = '{{otp}}' maxlength="6" required></p>
+			<br>
+			{% for message in messages %}
+			<p class = 'required' >{{message}}</p>
+			{% endfor %}
+			<input class = 'cbutton'type = 'submit' value = 'Continue'>
+			
+		</form>
+	</div>
+		
+</div>
+<
+{% endblock %}

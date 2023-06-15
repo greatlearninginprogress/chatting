@@ -1,0 +1,71 @@
+{% extends 'main1.html' %}
+{% load static %}
+{% block title %}
+
+
+
+
+{% endblock %}
+
+{% block script %}
+<!-- <script src = '{% static "javascript/main1.js" %}' defer></script> -->
+{% endblock script%}
+
+{% block content %}
+
+<div style = 'display:block; background-color:white;width:100%;height:370px;'>
+	<div style = 'padding-bottom: 30px' class = 'chatting-with'>
+		
+			<a href = '{% url "group-page" %}'><img  style = 'background-color: white;border-width:5px; border-style: solid;border-color: white;height:30px;border-radius:50%' src ='{% static "bamchat_image/previous.png" %}' ></a>
+
+			<a style='color:white;' href ='{% url "group-info" group_name %}' >{{group_name}} <small >(tap here for group info)</small></a>
+		
+	</div>
+
+	
+
+	<div class = 'message-container'>
+		{% for message_and_group_id, message in messages_and_group_id %}
+		{% if message.sender == request.user %}
+		<div class = 'sender-message'>
+			<small style = 'float:left;margin-left:7px'>
+				{{message.sender}} 				
+			</small>
+			<p style = 'padding-top: 10px' class = 'message'>
+				{{message.text}}
+			</p>
+			
+			<small style="float:left;width:50%;text-align: left">
+				<a style ='color:blue;margin-right:2px'  href="{% url 'edit-group-message' message_and_group_id %}">edit</a>|
+				<a style ='color:red;margin-left:2px' href="{% url 'delete-group-message' message_and_group_id %}">delete</a>
+			</small>
+			<small style = 'font-size: 13px;font-weight: 500;float:right;'>
+				{{message.time}}
+			</small>
+			<br>
+		</div>
+		
+		{% else %}
+
+		<div class = 'receiver-message'>
+		<p style = 'padding-top: 10px' class = 'message'>{{message.text}}</p>
+		<small style = 'font-size: 9px;font-weight: 300;float:right'>{{message.sender}} {{message.time}}</small><br>
+		</div>
+		{% endif %}
+		{% endfor %}
+
+		<p id = 'focus'>
+	</div>
+	<div class = 'submit-container'>
+		
+			<form method = 'post' action  = ''>
+				{% csrf_token %}
+				<textarea class = 'submit-form' name = 'text' required></textarea>
+				<input class = 'submit' type = 'submit' value = 'send'>
+			</form>
+		
+	</div>
+</div>
+{% endblock content %}
+
+

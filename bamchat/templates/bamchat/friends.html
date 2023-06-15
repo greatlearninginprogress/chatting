@@ -1,0 +1,115 @@
+{% extends 'main1.html' %}
+
+{% load static %}
+{% block title %}
+Bamchat Friend Page
+
+{% endblock %}
+
+{% block script %}
+<script src = '{% static "javascript/main1.js" %}' defer></script>
+{% endblock script%}
+
+{% block content %}
+
+<div  style = 'border-style: none' id = 'main'>
+	 <!-- |  -->
+	<!-- <img class = 'image'  src = '{% static "bamchat_image/logo.png" %}'> -->
+	<div class = 'header-bg'>
+		<div class = 'head'>
+			<p style = 'display:inline'>
+<!-- 			<img id = 'show-profile' class = 'icon' style = 'background:white;float:right;margin-top:5px;margin-right: 5px' src = '{% static "bamchat_image/menu.png" %}'>
+ -->	
+			<form method = 'post' action = ''>
+				{% csrf_token %}
+				<input class = 'fsearch' name = 'friend' type = 'search' placeholder="search friends....." required>
+				
+			</form></p>
+		</div>
+
+		<div class = 'head2'>
+			<a href = '{% url "home-page"%}'><img style = 'background:white;border-radius:25px' class = 'icon' src = '{% static "bamchat_image/home-button.png" %}'></a>
+			{% if frnd_req_length > 0 %}
+			<a href = '{% url "friend-page"%}' class = 'active'><img style = 'background:white;border-radius:25px;border-width:3px;border-style:solid;border-color: red' class = 'icon' src = '{% static "bamchat_image/friend.png" %}'></a>
+			{% else %}
+			<a href = '{% url "friend-page"%}' class = 'active'><img style = 'background:white;border-radius:25px;border-width:3px;border-style:solid;border-color: white' class = 'icon' src = '{% static "bamchat_image/friend.png" %}'></a>
+			{% endif %}
+			<a href = '{% url "chats"%}' ><img class = 'icon' src = '{% static "bamchat_image/chat.png" %}'></a>
+			<a href = '{% url "group-page" %}'><img  class = 'icon' src = '{% static "bamchat_image/group.png" %}'></a>
+			
+
+		</div>
+	</div>
+	<div class = 'content-bg'>
+		
+		<div class = "content" >
+			{% for friend in friends %}		
+			<p><a class = 'friend' href = "{% url 'view-friend' friend.user.id %}">{{friend}}</a></p>
+			{% endfor %}
+		</div>
+
+		<div class = 'fr'>
+			<h5 >Sent Requests</h5>
+			
+			{% for mrequest in my_request %}
+			{% if mrequest %}
+			<div class = 'friend-container' >
+				<a href = "{% url 'view-friend' mrequest.request_receiver.id %}">
+					<div>
+						<img style = 'float:left; border-radius: 50%' class = 'image' src = "{{mrequest.request_receiver.usercontact.picture.url}}">
+						
+						<a style = 'text-align:center; color:black;' href = "{% url 'view-friend' mrequest.request_receiver.id %}" >{{mrequest.request_receiver.username}}</a>
+						<br><br>
+						<a href = "{% url 'delete' mrequest.id %}" class = 'cancel-button'>Cancel</a>
+					</div>
+				</a>
+			</div>
+			{% endif %}
+			{% endfor %}
+			{% if my_req_length > 2 %}
+			<p class = 'button'>more</p>
+			{% endif %}
+			
+			
+			
+		</div>
+
+		<div class = 'fr'>
+			<h5 >Friend Requests</h5>
+			{% for fnd in friend_request %}
+			{% if fnd %}
+			<div class = 'friend-container'>
+				<img style = 'float:left;border-radius:50%' class = 'image' src = "{{fnd.request_sender.usercontact.picture.url}}">
+				<a style = 'text-align:center; color:black;' >{{fnd.request_sender.username}}</a>
+				<p>
+					<a style= 'color:white;padding:5px;border-radius:10px;background-color: red' href = "{% url 'delete' fnd.id %}" >Decline</a>
+					<a style= 'color:white;background-color: blue;padding:5px;border-radius:10px' href = "{% url 'accept' fnd.id %}" >Accept</a>
+				</p>
+				<!-- class = 'cancel-button' class = 'button' -->
+			</div>
+			{% else %}
+			<p>None</p>
+			{% endif %}
+			{% endfor %}
+
+			{% if frnd_req_length > 2 %}
+			<a href ='{% url "all-friends-request" %}' style = 'padding:5px' class = 'button'>see more</a>
+			{% endif %}
+			
+			
+			
+			
+		</div>
+
+
+		
+	</div>
+
+
+	
+	
+	
+</div>
+
+{% endblock %}
+
