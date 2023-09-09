@@ -1,0 +1,37 @@
+{%extends 'main2.html' %}
+
+
+
+{% block title %}
+
+BAMCHAT : ACCOUNT ACTIVATION
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class = 'signup-container'>
+	<p style = 'color:white;'>Enter OTP to activated your account</p>
+
+	<div class = 'signup-form'>
+		<form method = 'POST' action = ''>
+	{% csrf_token %}
+	
+	<p><label for = 'number_otp'>Enter OTP sent to {{email}} <br><br><input type = 'text' id = 'number_otp' placeholder="Enter OTP" name = 'phone_number_otp' maxlength = '6' required></label></p>
+
+		{% for message in messages %}
+		<p class = 'required' >{{message}}</p>
+		{% endfor %}
+
+	<p><a class = 'link' href = '{{request.META.HTTP_REFERER}}'>Go back</a><input class = 'button' type = 'submit' value = 'Verify' ></p>
+
+</form>
+
+	</div>
+</div>
+
+
+
+{% endblock %}
