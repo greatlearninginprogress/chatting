@@ -1,0 +1,277 @@
+.signup-container{
+	display:block;
+	text-align:center;
+	/*background-color: yellow;*/
+	border-width:5px;
+	border-radius:25px;
+	width:100%;
+	margin-bottom: 70px;
+}
+@media(min-width: 550px;){
+	.signup-container{
+		width:90%;
+		margin-right: auto;
+		margin-left: auto;
+		overflow-y: auto
+
+	}
+
+}
+
+.creation-page-container{
+	margin: 140px 0px 20px 0px;
+}
+@media(min-width: 550px;){
+	.creation-page-container{
+		margin: 90px 0px 20px 0px;
+	}
+}
+
+.success{
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	text-decoration:none;
+	background:white;
+	padding:5px;
+	border-width:3px;
+	width:50%;
+	font-size:13px;
+	color:green;
+}
+
+.error{
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	text-decoration:none;
+	background:white;
+	padding:5px;
+	border-width:3px;
+	font-size:13px;
+	color:green;
+}
+.signup-form{
+	background:white;
+	display:block;
+	padding:10px 10px 50px 10px;
+	color:blue;
+	font-size:20px;
+	margin: 20px auto 30px auto;
+	border-width:5px;
+	border-style:ridge;
+	border-color:white;
+	border-radius:25px;
+	width:80%;
+}
+@media(min-width: 550px){
+	.signup-form{
+		width:60%;
+		font-size:15px;
+	}
+}
+
+.required{
+	color:red;
+
+}
+
+.error-message{
+	color:red;
+	background-color: white;
+	padding:5px;
+	font-size: 20px;
+}
+@media(min-width: 550px){
+	.error-message{
+		font-size:15px;
+	}
+}
+.link{
+	text-decoration:none;
+	color:blue; 
+	float:left;
+	margin-left:15%;
+	background:blue;
+	color:white;
+	padding:5px 15px 5px 15px;
+	border-width:3px;
+	border-style:outset;
+	border-color:blue;
+	border-radius:15px;
+	font-size:16px;
+
+}
+
+.link-1{
+	display:block;
+	text-align: center;
+	text-decoration: none;
+	font-size:15px;
+	/*border-radius:20px;*/
+	color:blue;
+	background:white;
+	width:40%;
+	padding:3px;
+	margin-top: 30px;
+	margin-right: auto;
+	margin-left: auto;
+	
+	}
+
+.link-2{
+	
+	color:blue;
+	
+	width:100%;
+	}
+
+
+.login-button{
+	text-align:center;
+	background:blue;
+	color:white;
+	padding:5px 15px 5px 15px;
+	border-width:3px;
+	border-style:outset;
+	border-color:blue;
+	border-radius:15px;
+	font-size:20px;
+}
+
+@media(min-width: 550px){
+	.login-button{
+		font-size:15px;
+	}
+}
+.login-message{
+	display:block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: white;
+	padding:5px;
+	width:70%;
+	font-size:20px;
+}
+@media(min-width: 550px){
+	.login-message{
+		font-size:15px;
+		width:50%;
+	}
+}
+.sbutton{
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	text-decoration:none;
+	/*color:red; */
+	background:white;
+	color:red;
+	padding:5px;
+	border-width:3px;
+	width:50%;
+	/*border-style:outset;*/
+	/*border-color:blue;*/
+	/*border-radius:50px;*/
+	font-size:13px;
+
+}
+
+.rbutton{
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	text-decoration:none;
+	color:blue; 
+	background:white;
+	color:red;
+	padding:5px;
+	border-width:3px;
+	width:50%;
+	/*border-style:outset;*/
+	/*border-color:blue;*/
+	/*border-radius:50px;*/
+	font-size:13px;
+
+}
+
+.pbutton{
+	background:blue;
+	color:white;
+	padding:5px;
+	border-width:3px;
+	border-style:outset;
+	border-color:blue;
+	font-size:20px;
+
+}
+@media(min-width: 550px){
+	.pbutton{
+		font-size:15px;
+	}
+}
+.button{
+	text-decoration:none;
+	float:right;
+	margin-right:15%;
+	background:blue;
+	color:white;
+	padding:5px 15px 5px 15px;
+	border-width:3px;
+	border-style:outset;
+	border-color:blue;
+	border-radius:15px;
+	font-size:16px;
+
+}
+
+.continue-button{
+	background:blue;
+	color:white;
+	padding:5px 15px 5px 15px;
+	border-width:3px;
+	border-style:outset;
+	border-color:blue;
+	border-radius:15px;
+	font-size:20px;
+
+}
+
+@media(min-width: 550px){
+	.continue-button{
+		font-size: 15px;
+	}
+}
+
+.input{
+	width:90%;
+	font-size:20px;
+	text-indent: 10px;
+	height:30px;
+}
+@media(min-width: 550px){
+	.input{
+		font-size:15px;
+	}
+}
+
+
+.plain{
+	display:block;
+	margin-left: auto;
+	margin-right:auto;
+	text-align:center;
+	color:white;
+	font-family:verdana;
+	font-size:13px;
+}
+
+.plain a{
+	color:white;
+}
+
+
+/*.form-entry{
+	padding-bottom: 3px;
+}*/
