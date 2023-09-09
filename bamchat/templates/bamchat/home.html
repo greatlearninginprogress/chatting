@@ -1,0 +1,190 @@
+{% extends 'main1.html' %}
+
+{% load static %}
+{% block title %}
+Bamchat Homepage
+{% endblock %}
+
+{% block script %}
+<script src = '{% static "javascript/main1.js" %}' defer></script>
+{% endblock script%}
+
+{% block content %}
+
+<div id = 'main'>
+	 <!-- |  -->
+	<!-- <img class = 'image'  src = '{% static "bamchat_image/logo.png" %}'> -->
+	<div class = 'header-bg'>
+		<div class = 'head'>
+			<!-- button id = 'show-profile'> -->
+			<!-- <a href = '{% url "profile-picture" %}'><img class = 'logo' src = '{{user.usercontact.picture.url}}'></a> -->
+
+			<img title = 'Menu' id = 'show-profile' class = 'logo' style = 'background:white;float:right;margin-top:5px;margin-right: 5px;border-radius:30%' src = '{% static "bamchat_image/menu.png" %}'>
+		<!-- </button> -->
+		<p>Bamchat | Welcome {{user.username.upper}}</p>
+		</div>
+<!-- class = 'active' -->
+		<div class = 'head2'>
+			<a href = '{% url "home-page"%}' ><img title="Home" style = 'background:white;border-radius:25px;border-width:3px;border-style:solid;border-color: white' class = 'logo' src = '{% static "bamchat_image/home-button.png" %}'></a>
+			<a href = '{% url "friend-page"%}'><img title="Friend" class = 'logo' src = '{% static "bamchat_image/friend.png" %}'></a>
+			<a href = '{% url "chats"%}' ><img title="Chat" class = 'logo' src = '{% static "bamchat_image/chat.png" %}'></a>
+			<a href = '{% url "group-page" %}'><img title="Group" class = 'logo' src = '{% static "bamchat_image/group.png" %}'></a>
+			
+		</div>
+	</div>
+	<div class = 'content-bg'>
+		<div style = 'background-color:white;height:60px;padding-top:15px;display: block;font-size:14px'>
+			<a href = '{% url "create-post" %}' class = 'button'>Add post</a>
+		</div>
+		<div class= "post-container">
+			<hr style="height:3px;background-color: blue"	>
+
+			{% for post in posts %}
+
+			<div class = 'post-design'>
+				<a style = 'color:blue' href = '{% url "comment" post.id %}'>
+
+				<div style="background-color: white">
+					
+					<img class= 'post-creator-img' src = '{{post.post_creator.usercontact.picture.url}}'>
+					<a class="post-creator" href="{% url 'view-friend' post.post_creator.id %}">{{post.post_creator}}
+					</a>
+						
+		
+					<a href = '{% url "comment" post.id %}' class = 'post-content-container'>
+						<h3 class = 'post-content'>{{post.content}} - <small>{{post.time|timesince}} ago</small>
+						</h3>
+						{% if post.post_img %}
+						<section class = 'post-image-container'>
+							<img  class = 'post-image' src="{{post.post_img.url}}">
+						</section>
+						<br>
+						{% endif %}
+						<section class = 'reaction-container'>
+
+							
+							{% if request.user in post.like.all %} 
+								<a title = 'Unlike' class = 'unlike' href = '{% url "unlike_post" post.id %}'>Unlike({{post.like.all.count}})
+								</a> 
+							{% else %} 
+								<a title = 'Like' class = 'like' href = '{% url "like_post" post.id %}'>Like({{post.like.all.count}})</a> 
+							{% endif %}
+
+								<a title = 'Comment' class ='comment' href = '{% url "comment" post.id %}'>Comment
+								</a>
+								{% if post.post_creator == request.user %}
+								<a title = 'Edit' class ='edit-post' href="{% url 'edit-post' post.id %}">edit post
+								</a>
+								<a title = 'Delete' class ='delete-post' href="{% url 'delete-post' post.id %}">delete post
+								</a>
+								{% endif %}
+							
+						</section>
+						
+					</a>
+					
+					
+				</div>
+				</a>
+
+			<br>
+			</div>
+			<hr style="height:3px;background-color: blue"	>
+			{% endfor %}
+		</div>
+		
+	</div>
+
+
+	
+		
+	
+	
+</div>
+
+<div id ='profile-section'>
+	<div class = 'button-container'>
+		<!-- <button id = 'close'> -->
+		<img title="Close"  id = 'close' class = 'icon' src = '{% static "bamchat_image/close.png" %}'> 
+	<!-- </button> -->
+	</div>
+	
+	<div class = 'profile'>
+		<div class = 'section'>
+			<!-- <hr class = 'line' style = 'clear: right'> -->
+	
+			<h3>Username</h3>
+			<p class = 'edit'>{{user.username}}<span><a style ="color:blue" href = '{% url "change-username" %}'>Edit</a></span></p>
+		</div>
+
+		<div class = 'section'>
+			<!-- <hr class = 'line' style = 'clear: right'> -->
+	
+			<h3>Email</h3>
+			<p class = 'edit'>{{user.email}}<span><a style ="color:blue" href = '{% url "change-email" %}'>Edit</a></span></p>
+		</div>
+
+		<div class = 'section'>
+			<!-- <hr class = 'line' style = 'clear: right'> -->
+	
+			<h3>Phone number</h3>
+			<p class = 'edit'>{{user.usercontact.phone_number}}<span><a style ="color:blue" href = '{% url "change-phonenumber" %}'>Edit</a></span></p>
+		</div>
+
+		<div class = 'section'>
+			<!-- <hr class = 'line' style = 'clear: right'> -->
+	
+			<h3>Change password</h3>
+			<p class = 'edit' ><a style ="color:blue;margin-left: 0%" href = '{% url "new-password" %}'>change password</a></p>
+		</div>
+
+		<div class = 'section'>
+			<!-- <hr class = 'line' style = 'clear: right'> -->
+	
+			<h3>Profile picture</h3>
+			<p class = 'edit' ><a style ="color:blue;margin-left: 0%" href = '{% url "profile-picture" %}'>change profile picture</a></p>
+			
+		</div>
+
+		<div class = 'section'>
+			
+	
+			<h3>My Contact</h3>
+			<p class = 'edit' ><a style ="color:blue;margin-left: 0%" href = '{% url "my-friends" %}'>View all</a></p>
+			
+			
+		</div>
+
+
+		<div class = 'section'>
+			
+	
+			<h3>Feedback</h3>
+			<p class = 'edit' ><a style ="color:blue;margin-left: 0%" href = '{% url "feedback" %}'>Give feedback</a></p>
+			
+			
+		</div>
+
+		
+		<div class = 'section'>
+			<hr class = 'line' style = 'clear: right'>	
+			<table>
+				<tr>
+					<td style='width:50%'><a href = 'logout'><img title="Logout" class = 'icon' src = '{% static "bamchat_image/logout.png" %}'></a></td>
+					<td style='width:5%'><a style ='color:red;' href = 'logout'>Logout</a></td>
+				</tr>
+			</table>
+			<hr class = 'line' style = 'clear: right'>	
+			
+
+		</div>
+		
+
+	</div>
+	
+
+	
+</div>
+	
+{% endblock %}
+

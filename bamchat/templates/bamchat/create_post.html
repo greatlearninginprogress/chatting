@@ -1,0 +1,42 @@
+{% extends 'main1.html' %}
+
+{% block title %}
+BAMCHAT | CREATE POST
+{% endblock title %}
+{% load static %}
+{% block content %}
+<div style='display:block;padding-top:30px'>
+<a href = '{% url "home-page" %}'><img style = 'background-color: white;border-width:5px; border-style: solid;border-color: white;width:30px; 'class = 'icon' src ='{% static "bamchat_image/previous.png" %}' ></a>
+	
+</div>
+
+
+<div class = 'create-post-container'>
+	<h3 >Create Post</h3>
+	
+
+	<form method = 'post' action = '' enctype="multipart/form-data">
+	{% csrf_token %}
+	<p >Enter Post content</p>
+	<textarea  class = 'textarea' name = 'post_content' placeholder = "post content" required></textarea>
+
+	<p >Select picture<br><br>
+		<input type="file" name="image" accept="image/*">
+	</p>
+	<section class = 'error-message'>
+		{% for message in messages %}
+		{{message}}
+		{% endfor %}
+	</section>
+	<br>
+	<input  class ='button' type = 'submit' value= 'Create'>
+
+	</form>
+
+
+
+</div>
+{% endblock content %}
+	
+
+	

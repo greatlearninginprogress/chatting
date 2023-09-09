@@ -1,0 +1,45 @@
+
+{% extends 'main2.html' %}
+
+
+{% block title %}
+
+BAMCHAT : SIGNUP
+
+{% endblock %}
+
+{% block content %}
+<div class = 'signup-container'>
+		{% for message in messages %}
+			<p><span class = 'error-message'>* {{message}}</span></p>
+		{% endfor %}
+	<div class = 'signup-form'>
+		<form method = 'POST' action = ''>
+		{% csrf_token %}
+		
+		<p><label for = 'username'>Enter your username<span class = 'required'> (*)</span><br><br><input class = 'input' type = 'text' id = 'username' placeholder="Enter username" name = 'username' value = '{{username}}' required></label></p>
+
+		<p><label for = 'email'>Enter your email<span class = 'required'> (*)</span><br><br><input class = 'input' type = 'email' id = 'email' placeholder="Enter email" name = 'email' value = '{{email}}' required></label></p>
+
+		<p><label for = 'phone_number'>Enter your phone number<span class = 'required'> (*)</span><br><br><input class = 'input' type = 'number' id = 'phone_number' placeholder="Enter phone number" name = 'phone_number' value = '{{phone_number}}' required></label></p>
+
+		<p><label for = 'password'>Enter your password<span class = 'required'> (*)</span><br><br><input class = 'input' type='password' id = 'password' placeholder="Enter password" name = 'password'  value = '{{password}}' required></label></p>
+
+		<p><label for = 'cpassword'>Confirm password<span class = 'required'> (*)</span><br><br><input class = 'input' type = 'password' id = 'cpassword' placeholder="Confirm password" name = 'cpassword' value = '{{cpassword}}' required></label></p>
+
+		
+			
+				
+			
+
+		<p><a class = 'link' href = '{% url "creation-page" %}'>Go back</a><input class ='button' type = 'submit' value = 'Continue' ></p>
+
+		</form>
+		
+	</div>
+	
+</div>
+	
+
+{% endblock %}
+<!-- request.META.HTTP_REFERER -->
